@@ -8,12 +8,14 @@ Rails.application.configure do
 
   # Do not eager load code on boot.
   config.eager_load = false
-  
+
   # ignore yarn integrity constraint
   config.webpacker.check_yarn_integrity = false
-  
+
   # Show full error reports.
   config.consider_all_requests_local = true
+
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
