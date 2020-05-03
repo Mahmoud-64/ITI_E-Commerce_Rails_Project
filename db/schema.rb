@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 2020_05_03_191105) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-<<<<<<< HEAD
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -38,9 +37,6 @@ ActiveRecord::Schema.define(version: 2020_05_03_191105) do
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 
-  add_foreign_key "products", "brands"
-  add_foreign_key "products", "categories"
-=======
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "username", limit: 191, default: "", null: false
     t.string "email", limit: 191, default: "", null: false
@@ -58,5 +54,6 @@ ActiveRecord::Schema.define(version: 2020_05_03_191105) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
->>>>>>> 6b94abfdcb4b1d03e482fab1a06b50949668802c
+  add_foreign_key "products", "brands"
+  add_foreign_key "products", "categories"
 end

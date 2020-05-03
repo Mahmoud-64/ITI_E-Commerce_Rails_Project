@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-    GET /categories.json
+    
     def index
       @categories = Category.all
     end
@@ -23,6 +23,7 @@ class CategoriesController < ApplicationController
       
     end
   
+
     def update
         @category = Category.find(params[:id])
         if @category.update(category_params)
