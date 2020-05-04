@@ -21,4 +21,6 @@
 </table>
 
 <br>
+<% if can? :create, Brand %>
 <%= link_to 'New Brand', new_brand_path %>
+<% end %>

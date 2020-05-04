@@ -28,6 +28,13 @@ gem 'jquery-rails'
 
 #handle authentication
 gem 'devise'
+#handle authorization
+gem 'cancancan'
+#create admin dashboard
+# gem 'activeadmin'
+# gem 'draper'
+# gem 'pundit'
+
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
