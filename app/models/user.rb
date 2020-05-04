@@ -31,4 +31,9 @@ class User < ApplicationRecord
   def login
     @login || self.username || self.email
   end
+
+  delegate :can?, :cannot?, to: :ability
+  def ability
+    @ability ||= Ability.new(self)
+  end
 end

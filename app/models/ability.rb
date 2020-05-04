@@ -5,7 +5,7 @@ class Ability
 
   def initialize(user)
     # can :read, :all # permissions for every user, even if not logged in   
-    
+    user ||= User.new
     if user.present?
       if user.admin?
         #handle admin ability
@@ -16,10 +16,12 @@ class Ability
         # can :manage, Order
       elsif user.buyer?
         #handle buyer ability
+        # can :read, Brand
+        # can :read, Category
         # can :read, Product
         # can :manage, Cart
         # can [:create, :read], Order
-      else
+      # else
         # can :read, Product
       end
     end
