@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_one_attached :avatar
+  validate :image_type
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
@@ -15,8 +16,13 @@ class User < ApplicationRecord
   end
 
   #Validate user input
-  validates :username, presence: true, uniqueness: { case_sensitive: false }  
+  validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
+  validates :email, format: {
+    with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i,
+    message: "is not a valid email format"
+  }
+
 
   #handle signup with username and email
   def self.find_for_database_authentication(warden_conditions)
@@ -38,4 +44,16 @@ class User < ApplicationRecord
   def ability
     @ability ||= Ability.new(self)
   end
+
+
+  private
+
+  def image_type
+     if avatar.attached?
+       if !avatar.content_type.in?(%('image/jpeg image/png image/jpg'))
+         errors.add(:avatar, "needs to be a jpeg, jpg, png only!")
+       end
+     end
+  end
+
 end
