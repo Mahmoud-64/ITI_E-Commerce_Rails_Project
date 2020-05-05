@@ -1,0 +1,27 @@
+<div>
+    <h6 style="display:inline">Title: </h6>
+    <%= @product.title %>
+</div>
+
+<div>
+    <h6 style="display:inline">Description:</h6>
+    <%= @product.description %>
+</div>
+
+<div>
+    <h6 style="display:inline">Price:</h6>
+    <%= @product.price %>
+</div>
+<div>
+    <h6 style="display:inline">Brand : <%= @product.brand.name%></h6>
+</div>
+
+<div>
+    <h6 style="display:inline">Category: <%= @product.category.name%></h6>
+</div>
+
+<div>
+    <h6 style="display:inline">In stock quantity:</h6>
+    <%= @product.in_stock_quantity %>
+</div>
+<%= link_to 'Back', products_path %>

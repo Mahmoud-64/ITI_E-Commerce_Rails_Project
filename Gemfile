@@ -31,9 +31,9 @@ gem 'devise'
 #handle authorization
 gem 'cancancan'
 #create admin dashboard
-# gem 'activeadmin'
-# gem 'draper'
-# gem 'pundit'
+gem 'activeadmin'
+gem 'draper'
+gem 'pundit'
 
 
 # Use Active Storage variant

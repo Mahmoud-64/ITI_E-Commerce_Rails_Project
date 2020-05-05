@@ -19,6 +19,7 @@
     <%= form.label :in_stock_quantity %>
     <%= form.number_field :in_stock_quantity %>
 </div>
+
 <div class="field">
     <%= form.label :image %>
     <%= form.file_field :image %>
@@ -33,9 +34,5 @@
     <%=form.label :category_id%>
     <%= form.collection_select(:category_id , Category.all, :id,:name) %>
 </div>
-
-
-<div class="actions">
-    <%= form.submit %>
-</div>
+<%= form.submit %>
 <% end %>
