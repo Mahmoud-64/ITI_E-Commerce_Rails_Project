@@ -1,0 +1,38 @@
+<h1>new</h1>
+<%= form_with(model:@product, local: true) do |form| %>
+<div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+</div>
+
+<div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+</div>
+
+<div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price %>
+</div>
+
+<div class="field">
+    <%= form.label :in_stock_quantity %>
+    <%= form.number_field :in_stock_quantity %>
+</div>
+
+<div class="field">
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+</div>
+
+<div class="field">
+    <%=form.label :brand_id%>
+    <%= form.collection_select(:brand_id , Brand.all, :id,:name) %>
+</div>
+
+<div class="field">
+    <%=form.label :category_id%>
+    <%= form.collection_select(:category_id , Category.all, :id,:name) %>
+</div>
+<%= form.submit %>
+<% end %>
