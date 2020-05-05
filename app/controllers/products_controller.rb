@@ -3,7 +3,9 @@ class ProductsController < ApplicationController
         if params[:search].blank?
             @products = Product.all
         else
-            @products = Product.all.where("lower(title) LIKE :search", search: params[:search])
+            # @products = Product.all.where("lower(title) LIKE :search", search: params[:search])
+            @products = Product.all.where('title LIKE :search OR description LIKE :search', search: "%#{params[:search]}%")
+
         end
     end
 
