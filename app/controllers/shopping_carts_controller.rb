@@ -4,7 +4,11 @@ class ShoppingCartsController < ApplicationController
   # GET /shopping_carts
   # GET /shopping_carts.json
   def index
-    @shopping_carts = ShoppingCart.current_cart(current_user.id)
+    if(current_user.buyer?)
+      @shopping_carts = ShoppingCart.current_cart(current_user.id)
+    else
+      @shopping_carts = ShoppingCart.where.not(order_id: nil)
+    end
   end
 
   # GET /shopping_carts/1
@@ -25,13 +29,16 @@ class ShoppingCartsController < ApplicationController
   # POST /shopping_carts
   # POST /shopping_carts.json
   def create
-    @shopping_cart = ShoppingCart.new(shopping_cart_params)
+    @shopping_cart = ShoppingCart.new(shopping_cart_params.merge(user_id: current_user.id, order_id: nil))
+    # abort @shopping_cart.inspect
 
     respond_to do |format|
       if @shopping_cart.save
+        # abort @shopping_cart.inspect
         format.html { redirect_to @shopping_cart, notice: 'Shopping cart was successfully created.' }
         format.json { render :show, status: :created, location: @shopping_cart }
       else
+        # abort @shopping_cart.inspect
         format.html { render :new }
         format.json { render json: @shopping_cart.errors, status: :unprocessable_entity }
       end
@@ -61,6 +68,15 @@ class ShoppingCartsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def confirm
+    ShoppingCart.find(params[:id]).update(status: "Confirmed")
+    redirect_to shopping_carts_path 
+  end
+
+  def delever
+    
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -70,6 +86,6 @@ class ShoppingCartsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def shopping_cart_params
-      params.require(:shopping_cart).permit(:user_id, :product_id, :quantity, :price, :order_id)
+      params.permit(:product_id, :quantity)
     end
 end

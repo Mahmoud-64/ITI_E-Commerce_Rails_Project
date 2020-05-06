@@ -24,7 +24,8 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(order_params.merge(user_id: current_user.id))
+
+    @order = Order.new(user_id: current_user.id, status: "Pending")
 
     respond_to do |format|
       if @order.save
@@ -68,7 +69,5 @@ class OrdersController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
-    def order_params
-      params.require(:order).permit(:status, :price)
-    end
+   
 end
