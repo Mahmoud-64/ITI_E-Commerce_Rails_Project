@@ -5,7 +5,13 @@ class ProductsController < ApplicationController
         else
             # @products = Product.all.where("lower(title) LIKE :search", search: params[:search])
             @products = Product.all.where('title LIKE :search OR description LIKE :search', search: "%#{params[:search]}%")
+            @products=@products.where('price >= :min',min: params[:min]) if params[:min].present?;
+            @products=@products.where('price <= :max',max: params[:max]) if params[:max].present?;
+            @products=@products.where(brand_id: params[:brand_id]) if params[:brand_id].present?;
+            @products=@products.where(category_id: params[:category_id]) if params[:category_id].present?;
 
+
+            
         end
     end
 
