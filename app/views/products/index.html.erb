@@ -1,4 +1,13 @@
 <h1>Products</h1>
+<%= form_tag(products_path, :method => "get",   
+    class: 'navbar-form navbar-left') do %>
+<div class="input-group">
+    <%= search_field_tag :search, params[:search], placeholder: "Search", class: "form-control" %>
+    <div class="input-group-btn">
+        <%= button_tag "search", :class => 'btn btn-info glyphicon glyphicon-search',:name => nil%>
+    </div>
+</div>
+<% end %>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -6,7 +15,8 @@
             <th scope="col">Description</th>
             <th scope="col">Price</th>
             <th scope="col">stock quantity</th>
-            
+            <th scope="col">image</th>
+
         </tr>
     </thead>
 
@@ -17,10 +27,9 @@
             <td><%= product.description %></td>
             <td><%= product.price %></td>
             <td><%= product.in_stock_quantity %></td>
-
-
+            <td> <%= image_tag(product.image,:size=>"100x50",:class =>"thumbnail")if product.image.attached?%></td>
             <td><%= link_to 'Show',product_path(product) %></td>
-            <% if can? :manage, Product%>
+            <% #if can? :manage, Product%>
             <td><%= link_to 'Edit', edit_product_path(product) %></td>
             <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             <% end %>

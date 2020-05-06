@@ -21,6 +21,13 @@
 </div>
 
 <div>
+    <td>
+        <h6 style="display:inline">Image</h6>
+        <%= image_tag(@product.image,:size=>"300x200")if @product.image.attached?%>
+    </td>
+</div>
+
+<div>
     <h6 style="display:inline">In stock quantity:</h6>
     <%= @product.in_stock_quantity %>
 </div>

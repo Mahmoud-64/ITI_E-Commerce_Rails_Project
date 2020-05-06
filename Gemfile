@@ -37,7 +37,7 @@ gem 'pundit'
 
 
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.2'
 
 #env config for database
 gem "figaro"

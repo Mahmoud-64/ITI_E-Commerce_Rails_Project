@@ -32,12 +32,19 @@
                 <%= link_to "SignUp", new_user_registration_path, :class=>"nav-link" %>
               </li>
             <% else %>
-              <li class="nav-item">
-                <%# <span class="nav-link"><%= image_tag url_for(current_user.avatar), width:40, height:30 %></span> %>
-              </li>
+              <% if current_user.avatar.attached? %>
+                <li class="nav-item">
+                  <span class="nav-link"><%= image_tag url_for(current_user.avatar), width:40, height:30 %></span>
+                </li>
+              <% end %>
               <li class="nav-item">
                 <span class="nav-link"><%= current_user.username %></span>
               </li>
+              <% if current_user.admin? %>
+                <li class="nav-item">
+                <%= link_to "Manage", admin_root_path, :class=>"nav-link" %>
+                </li>
+              <% end %>
               <li class="nav-item">
                 <%= link_to 'Edit', edit_user_registration_path, :class=>"nav-link" %>
               </li>
