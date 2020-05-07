@@ -23,16 +23,22 @@ class ProductsController < ApplicationController
     def new
     @product = Product.new
     @store = current_user.store()
+    authorize! :create, @product
     end
 
     def edit
         @product = Product.find(params[:id])
+        # authorize! :manage, @product
+
+
     end
 
     def create
         @product = Product.new(product_params)
         @product.store = current_user.store()
         @product.save
+        redirect_to products_path
+
     end
 
     def update

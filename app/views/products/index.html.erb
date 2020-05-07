@@ -1,8 +1,6 @@
 <h1>Products</h1>
-<% if can? :create, Product %>
 <%= link_to 'New Product', new_product_path, :class => 'btn btn-info' %>
-<% end %>
-
+<p></p>
 <%= form_tag(products_path, :method => "get",
     class: 'navbar-form navbar-left') do %>
 <div class="input-group">
@@ -32,15 +30,15 @@
             <td><%= product.price %></td>
             <td><%= product.in_stock_quantity %></td>
             <td> <%= image_tag(product.image,:size=>"100x50",:class =>"thumbnail")if product.image.attached?%></td>
-            <td><%= link_to 'Show',product_path(product) %></td>
-            <% if can? :manage, Product%>
+            <td><%= link_to 'Show' ,product_path(product) %></td>
+            <% if can? :manage, Product  %>
             <td><%= link_to 'Edit', edit_product_path(product) %></td>
             <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             <% end %>
             <%= form_with(url: shopping_carts_path, method: "post") do |form| %>
-                <td><%= form.number_field :quantity %></td>
-                <td><%= form.hidden_field(:product_id, :value => product.id) %></td>
-                <td><%= form.submit "add" %></td>
+            <td><%= form.number_field :quantity %></td>
+            <td><%= form.hidden_field(:product_id, :value => product.id) %></td>
+            <td><%= form.submit "add" %></td>
             <% end %>
 
         </tr>
