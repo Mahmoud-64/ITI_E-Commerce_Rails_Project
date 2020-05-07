@@ -29,6 +29,7 @@ class ShoppingCartsController < ApplicationController
   # POST /shopping_carts
   # POST /shopping_carts.json
   def create
+    # abort shopping_cart_params.inspect
     @shopping_cart = ShoppingCart.new(shopping_cart_params.merge(user_id: current_user.id, order_id: nil))
     # abort @shopping_cart.inspect
 
@@ -48,8 +49,9 @@ class ShoppingCartsController < ApplicationController
   # PATCH/PUT /shopping_carts/1
   # PATCH/PUT /shopping_carts/1.json
   def update
+    # abort shopping_cart_params_update.inspect
     respond_to do |format|
-      if @shopping_cart.update(shopping_cart_params)
+      if @shopping_cart.update(shopping_cart_params_update)
         format.html { redirect_to @shopping_cart, notice: 'Shopping cart was successfully updated.' }
         format.json { render :show, status: :ok, location: @shopping_cart }
       else
@@ -86,6 +88,11 @@ class ShoppingCartsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def shopping_cart_params
+      
       params.permit(:product_id, :quantity)
+    end
+
+    def shopping_cart_params_update   
+      params.require(:shopping_cart).permit(:quantity)
     end
 end
