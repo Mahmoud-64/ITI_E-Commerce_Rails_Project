@@ -2,7 +2,10 @@ class CategoriesController < ApplicationController
     # load_and_authorize_resource
     
     def index
+        
       @categories = Category.all
+    #   authorize! :manage, @categories
+
     end
   
     def show
@@ -13,10 +16,12 @@ class CategoriesController < ApplicationController
   
     def new
       @category = Category.new
+      authorize! :manage, @category
     end
   
     def edit
         @category = Category.find(params[:id])
+        authorize! :manage, @category
     end
   
     def create
@@ -38,6 +43,7 @@ class CategoriesController < ApplicationController
   
     def destroy
         @category = Category.find(params[:id])
+        authorize! :manage, @category
         @category.destroy
     end
   
