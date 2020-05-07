@@ -48,7 +48,8 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: ITI_ECommerce_rails_project_production
-  username: ITI_ECommerce_rails_project
-  password: <%= ENV['ITI_ECOMMERCE_RAILS_PROJECT_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  encoding: unicode
+  database: postgres://lqmuurvpzjpbxg:c19ec0b5ea332434ef627cfdbe429035648bd41836bdab8fac6e803399ad0753@ec2-18-214-211-47.compute-1.amazonaws.com:5432/d9dmnfqvvvp1n1
+  # username: ITI_ECommerce_rails_project
+  # password: <%= ENV['ITI_ECOMMERCE_RAILS_PROJECT_DATABASE_PASSWORD'] %>
