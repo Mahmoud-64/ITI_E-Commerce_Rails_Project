@@ -26,7 +26,7 @@ class ShoppingCart < ApplicationRecord
   end
 
   before_save :calculate_price 
-  after_save :check_status
+  after_update :check_status
 
   private
     def calculate_price
@@ -36,8 +36,11 @@ class ShoppingCart < ApplicationRecord
     end
 
     def check_status
-      # abort self.status
+      # abort (order.present?).inspect
       # abort order.update_status(self.status)
-      order.update_status(self.status)
+      if order.present?
+        order.update_status(self.status)
+      end
+      
     end
 end

@@ -22,6 +22,7 @@ class ProductsController < ApplicationController
 
     def new
     @product = Product.new
+    @store = current_user.store()
     end
 
     def edit
@@ -30,6 +31,7 @@ class ProductsController < ApplicationController
 
     def create
         @product = Product.new(product_params)
+        @product.store = current_user.store()
         @product.save
     end
 

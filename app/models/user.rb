@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_one :store
   has_one_attached :avatar
   validate :image_type
   # Include default devise modules. Others available are:
@@ -45,6 +46,8 @@ class User < ApplicationRecord
   def ability
     @ability ||= Ability.new(self)
   end
+
+
 
 
   private

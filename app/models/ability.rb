@@ -4,7 +4,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    # can :read, :all # permissions for every user, even if not logged in   
+    # can :read, :all # permissions for every user, even if not logged in
     user ||= User.new
     if user.present?
       if user.admin?
@@ -12,7 +12,8 @@ class Ability
         can :manage, :all
       elsif user.seller?
         #handle seller ability
-        # can :manage, Product
+        can [:update, :read], Store, user_id: user.id
+        can :manage, Product, store_id: {store: {user_id: user.id}}
         # can :manage, Order
       elsif user.buyer?
         #handle buyer ability

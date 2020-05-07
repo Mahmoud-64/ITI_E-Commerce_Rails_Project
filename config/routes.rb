@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :stores
   devise_for :users, controllers: {
     confirmations: 'users/confirmations'
   }
