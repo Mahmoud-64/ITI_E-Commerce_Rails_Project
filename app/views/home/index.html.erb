@@ -18,11 +18,6 @@
 
         <%= form_with(model: Product, method: :get, :remote => true, :html => { :id => 'new-product-form' }) do %>
         <div class="input-group">
-            <%= search_field_tag :search, params[:search], placeholder: "Search", class: "form-control" %>
-            <div class="input-group-btn">
-                <%= button_tag "search", :class => 'btn btn-info glyphicon glyphicon-search',:name => nil%>
-            </div>
-
             <div class="field">
                 <%= search_field_tag :min, params[:min], placeholder: "min", class: "form-control" %>
             </div>
@@ -32,10 +27,15 @@
             <%# <%= select_tag :brand_id, options_for_select(Brand.all, selected: params[:brand_id]) %>
             <%# <%= options_for_select(cities_array) %>
             <% brands_array = Brand.all.map { |brand| [brand.name, brand.id] } %>
-            <%= select_tag :brand_id, options_for_select(brands_array,params[:brand_id]), {:include_blank => true} %>
+            <%= select_tag :brand_id, options_for_select(brands_array,params[:brand_id]), {:include_blank => "brand"} %>
 
             <% categories_array = Category.all.map { |category| [category.name, category.id] } %>
-            <%= select_tag :category_id, options_for_select(categories_array,params[:category_id]), {:include_blank => true} %>
+            <%= select_tag :category_id, options_for_select(categories_array,params[:category_id]), {:include_blank => "category"} %>
+            <%= search_field_tag :search, params[:search], placeholder: "Search", class: "form-control" %>
+            <div class="input-group-btn">
+                <%= button_tag "search", :class => 'btn btn-info glyphicon glyphicon-search',:name => nil%>
+            </div>
+
         </div>
         <% end %>
 
