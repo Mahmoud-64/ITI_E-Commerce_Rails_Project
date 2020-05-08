@@ -11,7 +11,7 @@ class ProductsController < ApplicationController
             @products=@products.where(category_id: params[:category_id]) if params[:category_id].present?;
 
 
-            
+
         end
     end
 
@@ -21,6 +21,7 @@ class ProductsController < ApplicationController
     end
 
     def new
+      @stores = Store.all
     @product = Product.new
     @store = current_user.store()
     end
@@ -31,7 +32,7 @@ class ProductsController < ApplicationController
 
     def create
         @product = Product.new(product_params)
-        @product.store = current_user.store()
+        # @product.store = current_user.store()
         @product.save
     end
 
@@ -54,6 +55,6 @@ class ProductsController < ApplicationController
     private
 
     def product_params
-        params.require(:product).permit(:title, :description, :price, :in_stock_quantity, :image, :brand_id, :category_id)
+        params.require(:product).permit(:title, :description, :price, :in_stock_quantity, :image, :brand_id, :category_id, :store_id)
     end
 end

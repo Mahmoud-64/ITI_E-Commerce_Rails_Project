@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params :email, :password, :password_confirmation
+  permit_params :username, :email, :password, :password_confirmation, :role
   menu priority: 2
   index do
     selectable_column
@@ -25,7 +25,13 @@ ActiveAdmin.register User do
       f.input :email
       f.input :password
       f.input :password_confirmation
-      f.input :role
+
+      if current_user.admin?
+        input :role
+      elsif current_user.seller?
+        input :role, as: :hidden, :input_html => { :value => current_user.role }
+      end
+      # f.input :role
     end
     f.actions
   end

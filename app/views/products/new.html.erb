@@ -36,8 +36,13 @@
 </div>
 
 <div class="field">
+  <% if current_user.admin? %>
+    <%= select('product', :store_id, options_for_select(@stores.collect{ |u| [u.name, u.id] })) %>
+  <% elsif current_user.seller? %>
     <%=form.label :store%>
+    <%= form.hidden_field :store_id, :value => @store.id %>
     <%= @store.name %>
+  <% end %>
 </div>
 <%= form.submit %>
 <% end %>
