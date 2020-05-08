@@ -1,8 +1,4 @@
 <p id="notice"><%= notice %></p>
-<%if @shopping_carts.count > 0 %>
-  <h1><%= link_to "submit cart", orders_path, method: :post %></h1>
-<%end%>
-
 <h1>Shopping Carts</h1>
 
 <table class="table">
@@ -47,6 +43,12 @@
     <% end %>
   </tbody>
 </table>
+
+<%if @shopping_carts.count > 0 %>
+  <div class="d-flex justify-content-end">
+    <%= link_to "Checkout", orders_path, method: :post, class: "btn btn-primary" %>
+  </div>
+<%end%>
 
 <br>
 
