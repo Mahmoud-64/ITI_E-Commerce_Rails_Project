@@ -17,8 +17,7 @@ class Ability
         can :create, Product
         # can :manage, Order
       elsif user.buyer?
-        can :manage, :all
-
+        
         #handle buyer ability
         # can :read, Brand
         # can :read, Category
