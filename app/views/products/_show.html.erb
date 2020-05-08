@@ -1,35 +1,25 @@
-<div class="container m-5">
-    <div>
-        <h6 style="display:inline">Title: </h6>
-        <%= @product.title %>
-    </div>
+<div class="container my-5">
+    <div class="row justify-content-center">
 
-    <div>
-        <h6 style="display:inline">Description:</h6>
-        <%= @product.description %>
-    </div>
-
-    <div>
-        <h6 style="display:inline">Price:</h6>
-        <%= @product.price %>
-    </div>
-    <div>
-        <h6 style="display:inline">Brand : <%= @product.brand.name%></h6>
-    </div>
-
-    <div>
-        <h6 style="display:inline">Category: <%= @product.category.name%></h6>
-    </div>
-
-    <div>
-        <td>
-            <h6 style="display:inline">Image</h6>
-            <%= image_tag(@product.image,:size=>"300x200")if @product.image.attached?%>
-        </td>
-    </div>
-
-    <div>
-        <h6 style="display:inline">In stock quantity:</h6>
-        <%= @product.in_stock_quantity %>
+        <div class="card" style="width: 25rem;">
+            <%= image_tag(@product.image,:size=>"300x200", :class=>"card-img-top")if @product.image.attached?%>
+            <div class="d-flex justify-content-between bd-highlight py-2">
+                <div class="p-2 bd-highlight"><small><strong>Category: </strong><%= @product.category.name %></small></div>
+                <div class="p-2 bd-highlight"><small><strong>Brand: </strong><%= @product.brand.name %></small></div>
+            </div>
+            <div class="card-body">
+            <h5 class="card-title text-center bg-dark text-white"><strong><%= @product.title %></strong></h5>
+            <p class="card-text bg-light"><%= @product.description %></p>
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between bd-highlight py-2">
+                        <div class="p-2 bd-highlight btn-info"><strong>CURRENT PRICE: </strong><%= @product.price %></div>
+                        <div class="p-2 bd-highlight btn-warning"><strong>Stock: </strong><%= @product.in_stock_quantity %></div>
+                    </div>
+                </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
+
