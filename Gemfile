@@ -34,7 +34,7 @@ gem 'cancancan'
 gem 'activeadmin'
 gem 'draper'
 gem 'pundit'
-gem 'pg', '~> 0.18.4'
+# gem 'pg', '~> 0.18.4'
 
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
