@@ -12,12 +12,16 @@ class Ability
         can :manage, :all
       elsif user.seller?
         #handle seller ability
+        can [:update], User, id: user.id
         can [:update, :read], Store, user_id: user.id
-        # can :manage, Product, store_id: {store: {user_id: user.id}}
+
         can :create, Product
+        can [:update, :read], Product, store_id: user.store.id
+        can :read, ActiveAdmin::Page, name: "Dashboard"
+        # can :manage, Product, store_id: {store: {user_id: user.id}}
         # can :manage, Order
       elsif user.buyer?
-        
+
         #handle buyer ability
         # can :read, Brand
         # can :read, Category

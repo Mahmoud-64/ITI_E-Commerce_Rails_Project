@@ -5,11 +5,11 @@ class ShoppingCartsController < ApplicationController
   # GET /shopping_carts
   # GET /shopping_carts.json
   def index
-    # if(current_user.buyer?)
+    if(current_user.buyer?)
       @shopping_carts = ShoppingCart.current_cart(current_user.id)
-    # else
-    #   @shopping_carts = ShoppingCart.where.not(order_id: nil)
-    # end
+    else
+      @shopping_carts = ShoppingCart.where.not(order_id: nil)
+    end
   end
 
   # GET /shopping_carts/1
