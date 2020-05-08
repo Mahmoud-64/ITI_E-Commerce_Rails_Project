@@ -1,39 +1,46 @@
 class ProductsController < ApplicationController
+    respond_to :html, :js
     def index
-        if params[:search].blank?
-            @products = Product.all
-        else
-            # @products = Product.all.where("lower(title) LIKE :search", search: params[:search])
+        # if params[:search].blank?
+        #     @products = Product.all
+        # else
+        #     # @products = Product.all.where("lower(title) LIKE :search", search: params[:search])
+        #     byebug
             @products = Product.all.where('title LIKE :search OR description LIKE :search', search: "%#{params[:search]}%")
             @products=@products.where('price >= :min',min: params[:min]) if params[:min].present?;
             @products=@products.where('price <= :max',max: params[:max]) if params[:max].present?;
             @products=@products.where(brand_id: params[:brand_id]) if params[:brand_id].present?;
             @products=@products.where(category_id: params[:category_id]) if params[:category_id].present?;
 
+        respond_with( @products, :layout => !request.xhr? )
 
-
-        end
     end
 
     def show
         @product = Product.find(params[:id])
-
+        respond_with( @product, :layout => !request.xhr? )
     end
 
     def new
       @stores = Store.all
     @product = Product.new
     @store = current_user.store()
+    authorize! :create, @product
     end
 
     def edit
         @product = Product.find(params[:id])
+        # authorize! :manage, @product
+
+
     end
 
     def create
         @product = Product.new(product_params)
         # @product.store = current_user.store()
         @product.save
+        redirect_to products_path
+
     end
 
     def update

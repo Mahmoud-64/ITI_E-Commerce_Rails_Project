@@ -5,6 +5,13 @@ class Product < ApplicationRecord
     belongs_to :store
     validate :image_type
 
+    def change_available_quantity(number)
+        # abort number.inspect
+        self.in_stock_quantity = self.in_stock_quantity - number
+        # abort self.inspect
+        self.save
+    end
+    
     private
     def image_type
        if image.attached?
@@ -12,5 +19,6 @@ class Product < ApplicationRecord
            errors.add(:image, "needs to be a jpeg, jpg, png only!")
          end
        end
-    end
+     end
+
 end

@@ -14,11 +14,14 @@ class Ability
         #handle seller ability
         can [:update], User, id: user.id
         can [:update, :read], Store, user_id: user.id
+
         can :create, Product
         can [:update, :read], Product, store_id: user.store.id
         can :read, ActiveAdmin::Page, name: "Dashboard"
+        # can :manage, Product, store_id: {store: {user_id: user.id}}
         # can :manage, Order
       elsif user.buyer?
+
         #handle buyer ability
         # can :read, Brand
         # can :read, Category
@@ -55,5 +58,8 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
+
+    #buyer:0
+    #seller:1
   end
 end
