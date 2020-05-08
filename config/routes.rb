@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   
   root to: "home#index"
+  # root to: "products#index"
   resources :categories
   resources :brands
   resources :products
