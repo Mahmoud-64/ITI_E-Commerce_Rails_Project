@@ -53,9 +53,7 @@
       </div>
     </nav>
   </header>
-<% if ! (current_page?(user_session_path) ||
-  current_page?(new_user_registration_path) ||
-    current_page?(edit_user_registration_path)) %>
+<% if current_page?(root_path)  %>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class=""></li>
