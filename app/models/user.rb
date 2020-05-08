@@ -1,10 +1,11 @@
 class User < ApplicationRecord
+  has_one :store
   has_one_attached :avatar
   validate :image_type
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :confirmable,
+        #  :confirmable,
          :recoverable, :rememberable, :validatable,
          authentication_keys: [:login]
 
@@ -45,6 +46,8 @@ class User < ApplicationRecord
   def ability
     @ability ||= Ability.new(self)
   end
+
+
 
 
   private

@@ -13,14 +13,17 @@
         <tr>
             <td><%= brand.name %></td>
             <td><%= link_to 'Show', brand %></td>
+            <% if can? :manage, Brand %>
+
             <td><%= link_to 'Edit', edit_brand_path(brand) %></td>
             <td><%= link_to 'Destroy', brand, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <%end%>
         </tr>
         <% end %>
     </tbody>
 </table>
 
 <br>
-<% if can? :create, Brand %>
+<% if can? :manage, Brand %>
 <%= link_to 'New Brand', new_brand_path %>
 <% end %>

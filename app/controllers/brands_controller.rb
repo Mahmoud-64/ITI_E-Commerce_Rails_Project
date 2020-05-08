@@ -12,10 +12,13 @@ class BrandsController < ApplicationController
     
       def new
         @brand = Brand.new
+      authorize! :manage, @brand
+
       end
     
       def edit
           @brand = Brand.find(params[:id])
+          authorize! :manage, @brand
       end
     
       def create
@@ -37,6 +40,7 @@ class BrandsController < ApplicationController
     
       def destroy
           @brand = Brand.find(params[:id])
+          authorize! :manage, @brand
           @brand.destroy
       end
     

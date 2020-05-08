@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :stores
   devise_for :users, controllers: {
     confirmations: 'users/confirmations'
   }
@@ -12,5 +13,10 @@ Rails.application.routes.draw do
   resources :categories
   resources :brands
   resources :products
+
+  resources :shopping_carts
+  put '/shopping_carts/:id/confirm', to: 'shopping_carts#confirm', as: 'confirm_shopping_cart'
+  put '/shopping_carts/:id/deliver', to: 'shopping_carts#deliver', as: 'deliver_shopping_cart'
+  resources :orders
 
 end
