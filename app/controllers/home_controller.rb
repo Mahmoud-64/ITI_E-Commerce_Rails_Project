@@ -4,5 +4,7 @@ class HomeController < ApplicationController
   def index
     @products=Product.all()
     @categories=Category.all()
+    @shoppingCarts=ShoppingCart.where(user_id: current_user)
+    # byebug
   end
 end
