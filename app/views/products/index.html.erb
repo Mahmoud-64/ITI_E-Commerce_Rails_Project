@@ -18,10 +18,10 @@
     <%# <%= select_tag :brand_id, options_for_select(Brand.all, selected: params[:brand_id]) %>
     <%# <%= options_for_select(cities_array) %>
     <% brands_array = Brand.all.map { |brand| [brand.name, brand.id] } %>
-    <%= select_tag :brand_id, options_for_select(brands_array,params[:brand_id]) %>
+    <%= select_tag :brand_id, options_for_select(brands_array,params[:brand_id]), {:include_blank => true} %>
 
     <% categories_array = Category.all.map { |category| [category.name, category.id] } %>
-    <%= select_tag :category_id, options_for_select(categories_array,params[:category_id]) %>
+    <%= select_tag :category_id, options_for_select(categories_array,params[:category_id]), {:include_blank => true} %>
 
 </div>
 <% end %>

@@ -1,0 +1,2 @@
+$("#products").empty();
+$("<%= escape_javascript(render @products) %>").appendTo("#products");

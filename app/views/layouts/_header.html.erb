@@ -1,0 +1,55 @@
+
+    <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <%= link_to "logo", root_path, :class=>"navbar-brand" %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <%= link_to "Home", root_path, :class=>"nav-link" %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "Brands", brands_path, :class=>"nav-link" %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "Categories", categories_path, :class=>"nav-link" %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "Products", products_path, :class=>"nav-link" %>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <% if !user_signed_in? %>
+            <li class="nav-item">
+              <%= link_to "Login", new_user_session_path, :class=>"nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "SignUp", new_user_registration_path, :class=>"nav-link" %>
+            </li>
+          <% else %>
+            <% if current_user.avatar.attached? %>
+              <li class="nav-item">
+                <span class="nav-link"><%= image_tag url_for(current_user.avatar), width:40, height:30 %></span>
+              </li>
+            <% end %>
+            <li class="nav-item">
+              <span class="nav-link"><%= current_user.username %></span>
+            </li>
+            <% if current_user.admin? %>
+              <li class="nav-item">
+              <%= link_to "Manage", admin_root_path, :class=>"nav-link" %>
+              </li>
+            <% end %>
+            <li class="nav-item">
+              <%= link_to 'Edit', edit_user_registration_path, :class=>"nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Logout', destroy_user_session_path, method: :delete, :class=>"nav-link" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+  </header>
