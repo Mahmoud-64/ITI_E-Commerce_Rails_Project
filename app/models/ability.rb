@@ -16,10 +16,16 @@ class Ability
         can [:update, :read], Store, user_id: user.id
 
         can :create, Product
-        can [:update, :read], Product, store_id: user.store.id
+        can [:update, :read], Product, store_id: user.store
         can :read, ActiveAdmin::Page, name: "Dashboard"
+
+        
+
         # can :manage, Product, store_id: {store: {user_id: user.id}}
         # can :manage, Order
+
+        can :create, [ShoppingCart, Order]
+        can [:destroy, :update], ShoppingCart, user_id: user.store.id
       elsif user.buyer?
 
         #handle buyer ability
@@ -30,6 +36,9 @@ class Ability
         # can [:create, :read], Order
       # else
         # can :read, Product
+
+        can :create, [ShoppingCart, Order]
+        can [:destroy, :update], ShoppingCart, user_id: user.id
       end
     end
     # Define abilities for the passed in user here. For example:

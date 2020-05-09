@@ -19,6 +19,12 @@
           <li class="nav-item active">
             <%= link_to "Products", products_path, :class=>"nav-link" %>
           </li>
+          <% if user_signed_in? %>
+            <li class="nav-item active">
+              <%= link_to "#{current_user.buyer? ? 'Shopping Cart' : 'Orders'}", shopping_carts_path, :class=>"nav-link" %>
+            </li>
+          <% end %>
+          
         </ul>
         <ul class="navbar-nav ml-auto">
           <% if !user_signed_in? %>

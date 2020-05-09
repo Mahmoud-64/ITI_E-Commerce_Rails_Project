@@ -6,8 +6,8 @@ class ShoppingCartsController < ApplicationController
   def index
     if(current_user.buyer?)
       @shopping_carts = ShoppingCart.current_cart(current_user.id)
-    else
-      @shopping_carts = ShoppingCart.where.not(order_id: nil)
+    elsif(current_user.seller?)
+      @shopping_carts = ShoppingCart.seller_orders(current_user)
     end
   end
 
@@ -20,6 +20,7 @@ class ShoppingCartsController < ApplicationController
   # GET /shopping_carts/new
   def new
     @shopping_cart = ShoppingCart.new
+    authorize! :create, @shopping_cart
   end
 
   # GET /shopping_carts/1/edit
@@ -50,6 +51,7 @@ class ShoppingCartsController < ApplicationController
   # PATCH/PUT /shopping_carts/1.json
   def update
     # abort shopping_cart_params_update.inspect
+    authorize! :update, @shopping_cart
     respond_to do |format|
       if @shopping_cart.update(shopping_cart_params_update)
         format.html { redirect_to @shopping_cart, notice: 'Shopping cart was successfully updated.' }
@@ -72,12 +74,19 @@ class ShoppingCartsController < ApplicationController
   end
   
   def confirm
+    @shopping_cart = ShoppingCart.find(params[:id])
+    authorize! :update, @shopping_cart
     ShoppingCart.find(params[:id]).update(status: "Confirmed")
     redirect_to shopping_carts_path 
   end
 
   def delever
-    
+    @shopping_cart = ShoppingCart.find(params[:id])
+    authorize! :update, @shopping_cart
+    if (@shopping_cart.order.status == "Confirmed")
+      @shopping_cart.update(status: "Delevered")
+    end
+    redirect_to shopping_carts_path 
   end
 
   private

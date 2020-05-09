@@ -27,6 +27,11 @@ class ShoppingCart < ApplicationRecord
     self.status == "Confirmed"
   end
 
+  def self.seller_orders(user)
+    # abort ShoppingCart.joins(:product).inspect 
+    ShoppingCart.where.not(order_id: nil).where(product_id: user.products) 
+  end
+
   before_save :calculate_price 
   after_update :check_status
   after_save :change_available_quantity_in_product 
@@ -45,7 +50,6 @@ class ShoppingCart < ApplicationRecord
       if order.present?
         order.update_status(self.status)
       end
-      
     end
 
     def available_quantity?
@@ -60,7 +64,7 @@ class ShoppingCart < ApplicationRecord
     end
 
     def release_holding_quantity
-      product.change_available_quantity self.quantity
+      product.change_available_quantity -(self.quantity)
     end
 
     def change_available_quantity_in_product
