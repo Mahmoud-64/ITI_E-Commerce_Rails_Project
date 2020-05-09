@@ -23,6 +23,23 @@
                 </div>
                 <div class="card-footer">
                   <small class="text-muted">★ ★ ★ ★ ☆</small>
+                  <div class="d-flex justify-content-end bd-highlight mb-3">
+                      <div class="p-3 bd-highlight">
+                        <% if !@shoppingCarts.nil? && !@shoppingCarts.empty? %>
+                          <% @shoppingCarts.each do |cart| %>
+                            <% if cart.product_id == product.id %>
+                              <%= button_to "Add to Cart", cart, :method => :delete , class: "btn btn-danger", id: "cart#{product.id}" %>
+                              <% break %>
+                            <% end %>
+                            <% if @shoppingCarts.last == cart %>
+                            <%= button_to "Add to Cart", shopping_carts_path(product_id: product.id, quantity: 1), :method => :post , class: "btn btn-primary", id: "cart#{product.id}" %>
+                            <% end %>
+                          <% end %>
+                        <% else %>
+                          <%= button_to "Add to Cart", shopping_carts_path(product_id: product.id, quantity: 1), :method => :post , class: "btn btn-primary", id: "cart#{product.id}" %>
+                        <% end %>
+                      </div>
+                  </div>
                 </div>
               </div>
             </div>

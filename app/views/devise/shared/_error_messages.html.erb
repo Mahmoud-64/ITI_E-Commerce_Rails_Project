@@ -1,14 +1,17 @@
 <% if resource.errors.any? %>
   <div id="error_explanation">
-    <h2>
+    <div class="error_msg list-group-item ">
       <%= I18n.t("errors.messages.not_saved",
                  count: resource.errors.count,
                  resource: resource.class.model_name.human.downcase)
        %>
-    </h2>
-    <ul>
+    </div>
+    <ul class="list-group">
       <% resource.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <li class="list-group-item error_msg p-0">
+          <span class="badge badge-danger badge-pill">x</span>
+          <%= message %>
+        </li>
       <% end %>
     </ul>
   </div>

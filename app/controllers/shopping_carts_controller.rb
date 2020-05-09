@@ -1,4 +1,5 @@
 class ShoppingCartsController < ApplicationController
+  respond_to :html, :js
   before_action :set_shopping_cart, only: [:show, :edit, :update, :destroy]
 
   # GET /shopping_carts
@@ -38,7 +39,7 @@ class ShoppingCartsController < ApplicationController
       if @shopping_cart.save
         # abort @shopping_cart.inspect
         format.html { redirect_to @shopping_cart, notice: 'Shopping cart was successfully created.' }
-        format.json { render :show, status: :created, location: @shopping_cart }
+        format.json { render  @shopping_cart, status: :created, location: @shopping_cart }
       else
         # abort @shopping_cart.inspect
         format.html { render :new }
@@ -69,6 +70,7 @@ class ShoppingCartsController < ApplicationController
     @shopping_cart.destroy
     respond_to do |format|
       format.html { redirect_to shopping_carts_url, notice: 'Shopping cart was successfully destroyed.' }
+      format.js
       format.json { head :no_content }
     end
   end

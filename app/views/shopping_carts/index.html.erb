@@ -1,18 +1,14 @@
 <p id="notice"><%= notice %></p>
-<%if @shopping_carts.count > 0 %>
-  <h1><%= link_to "submit cart", orders_path, method: :post %></h1>
-<%end%>
-
 <h1>Shopping Carts</h1>
 
-<table>
-  <thead>
+<table class="table">
+  <thead class="thead-dark">
     <tr>
-      <th>User</th>
-      <th>Product</th>
-      <th>Quantity</th>
-      <th>Price</th>
-      <th>Order</th>
+      <th scope="col">User</th>
+      <th scope="col">Product</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Price</th>
+      <th scope="col">Order</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -22,7 +18,13 @@
       <tr>
         <td><%= shopping_cart.user_id %></td>
         <td><%= shopping_cart.product.title %></td>
-        <td><%= shopping_cart.quantity %></td>
+        <td>
+          <%= form_with(url: shopping_cart, method: "put") do |form| %>
+            <%= form.number_field :quantity, value: shopping_cart.quantity %>
+            <%= form.hidden_field(:product_id, :value => shopping_cart.product.id) %>
+            <%= form.submit "add" %>
+          <% end %>
+        </td>
         <td><%= shopping_cart.price %></td>
         <td><%= shopping_cart.order_id %></td>
         <td><%= link_to 'Show', shopping_cart %></td>
@@ -41,6 +43,12 @@
     <% end %>
   </tbody>
 </table>
+
+<%if @shopping_carts.count > 0 %>
+  <div class="d-flex justify-content-end">
+    <%= link_to "Checkout", orders_path, method: :post, class: "btn btn-primary" %>
+  </div>
+<%end%>
 
 <br>
 
